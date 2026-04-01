@@ -17,7 +17,7 @@ const sttRoute = require("./chatbot/stt")
 const pool = require("./database/DB");
 const { encrypt } = require("./utils/encryption");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.DB_PORT || 3000;
 // ─── Auto-start Flask note-taking service ────────────────────────────────────
 const FLASK_DIR = path.join(__dirname, 'note-taking');
 const flaskProcess = spawn('python', ['flask_app.py'], {
