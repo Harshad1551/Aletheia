@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Aletheia Color System */
+    --background: 36 33% 93%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+    --primary: 43 89% 62%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 36 33% 93%;
+    --secondary-foreground: 0 0% 7%;
+    --muted: 36 20% 88%;
+    --muted-foreground: 0 0% 42%;
+    --accent: 43 89% 62%;
+    --accent-foreground: 0 0% 7%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 7%;
+    --input: 0 0% 90%;
+    --ring: 43 89% 62%;
+    --radius: 0.25rem;
+    
+    /* Color Strip System */
+    --teal: 174 35% 61%;
+    --pink: 345 58% 59%;
+    --coral: 15 87% 64%;
+    --amber: 43 89% 62%;
+    
+    /* Custom Colors */
+    --cream: #F5EDE4;
+    --dark: #111111;
+    --text-secondary: #6B6B6B;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-[#F5EDE4] text-[#111111] antialiased;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+  
+  .font-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Color Strip Navigation */
+  .color-strip {
+    @apply w-12 h-full cursor-pointer transition-transform duration-300;
+  }
+  
+  .color-strip:hover {
+    transform: translateY(-6px);
+  }
+  
+  .strip-teal { background-color: #7CBDB6; }
+  .strip-pink { background-color: #D85A7D; }
+  .strip-coral { background-color: #F27B53; }
+  .strip-amber { background-color: #F5B94A; }
+  
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-[#F5B94A] text-[#111111] px-6 py-3 font-medium transition-all duration-300;
+  }
+  
+  .btn-primary:hover {
+    @apply scale-105;
+    box-shadow: 0 10px 30px rgba(245, 185, 74, 0.4);
+  }
+  
+  .btn-outline {
+    @apply border border-[#111111] text-[#111111] px-6 py-3 font-medium transition-all duration-300;
+  }
+  
+  .btn-outline:hover {
+    @apply bg-[#111111] text-[#F5EDE4];
+  }
+  
+  /* Card Styles */
+  .feature-card {
+    @apply bg-white border border-[#111111] p-6 transition-all duration-300;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Grain Overlay */
+  .grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  
+  /* Filmstrip */
+  .filmstrip {
+    background: #111111;
+    position: relative;
+  }
+  
+  .filmstrip::before,
+  .filmstrip::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 8px,
+      #F5EDE4 8px,
+      #F5EDE4 14px,
+      transparent 14px,
+      transparent 22px
+    );
+  }
+  
+  .filmstrip::before { top: 6px; }
+  .filmstrip::after { bottom: 6px; }
+  
+  /* Section Base */
+  .section-pinned {
+    @apply relative w-screen h-screen overflow-hidden;
+  }
+  
+  .section-flowing {
+    @apply relative w-full py-20 md:py-32;
+  }
+  
+  /* Typography */
+  .text-display {
+    font-size: clamp(2.75rem, 8vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  
+  .text-headline {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+  
+  .text-subhead {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+  
+  .text-micro {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+@layer utilities {
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+/* Therapist Profile Sidebar Animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

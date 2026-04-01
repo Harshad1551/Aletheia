@@ -1,0 +1,34 @@
+# All types of csv files
+*.csv
+
+# All types of txt files
+*.txt
+# except
+!requirements.txt
+
+# All types of env files
+.env.*
+
+# Exclude vosk model files
+note-taking/vosk_model/*
+
+# Exclude ML model files
+*.pkl
+
+# All pycache files
+__pycache__/
+
+*.env
+
+# Exclude node_modules
+node_modules/
+
+check_db.js
+db_check.json
+schema_dump.json
+backend/alter_db.js
+backend/checkDb.js
+backend/dump_schema.js
+backend/node_debug.log
+backend/chatbot/debug.log
+backend/chatbot/test.py
