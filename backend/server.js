@@ -4,6 +4,11 @@ const http = require("http");
 const { Server } = require("socket.io");
 const { spawn } = require("child_process");
 const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Node backend running ✅");
+});
+
 const cors = require("cors")
 const chatbotRoute = require("./chatbotTest")
 const auth = require("./auth/auth")
