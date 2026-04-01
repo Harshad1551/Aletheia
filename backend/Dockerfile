@@ -1,4 +1,4 @@
-# Use Python base image, as it's easier to add Node.js to a Python image than vice versa
+# Use Python base image
 FROM python:3.11-slim
 
 # Install Node.js (v20)
@@ -7,22 +7,34 @@ RUN apt-get update && apt-get install -y curl && \
     apt-get install -y nodejs && \
     apt-get clean
 
-# Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# 1. Install Node.js Dependencies First (Helps with Docker Caching)
+# -----------------------------
+# Install Node dependencies
+# -----------------------------
 COPY package.json package-lock.json* ./
 RUN npm install
 
-# 2. Install Python Dependencies
+# -----------------------------
+# Install Python dependencies
+# -----------------------------
 COPY note-taking/requirements.txt ./note-taking/
 RUN pip install --no-cache-dir -r note-taking/requirements.txt
 
-# 3. Copy the rest of the application code
+# -----------------------------
+# Copy all backend code
+# -----------------------------
 COPY . .
 
-# 4. Expose the port your Node.js app runs on
+# -----------------------------
+# Expose Render port
+# -----------------------------
 EXPOSE 3000
 
-# 5. Start the Node.js application
-CMD ["node", "server.js"]
+# -----------------------------
+# Start BOTH services
+# Node = main (Render)
+# Flask = background
+# -----------------------------
+CMD ["sh", "-c", "python3 note-taking/flask_app.py & node server.js"]
