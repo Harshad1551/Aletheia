@@ -16,9 +16,8 @@ const diaryRoute = require("./diary/diary")
 const sttRoute = require("./chatbot/stt")
 const pool = require("./database/DB");
 const { encrypt } = require("./utils/encryption");
-
 // ─── Auto-start Flask note-taking service ────────────────────────────────────
-const FLASK_DIR = path.join(__dirname, '..', 'note-taking');
+const FLASK_DIR = path.join(__dirname, 'note-taking');
 const flaskProcess = spawn('python', ['flask_app.py'], {
     cwd: FLASK_DIR,
     stdio: ['ignore', 'pipe', 'pipe'],
